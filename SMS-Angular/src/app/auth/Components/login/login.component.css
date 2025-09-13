@@ -1,0 +1,117 @@
+/* Centering */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f2f4f7;
+}
+
+/* Box */
+.login-box {
+  width: 100%;
+  max-width: 380px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.login-title {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  color: #333;
+}
+
+/* Form */
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #444;
+}
+
+input {
+  width: 93%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+input:focus {
+  border-color: #0066cc;
+  outline: none;
+}
+
+input.invalid {
+  border-color: #d9534f;
+}
+
+.error small {
+  color: #d9534f;
+  font-size: 12px;
+}
+
+/* Alerts */
+.alert {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  padding: 8px;
+  font-size: 13px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.alert.error {
+  background: #fdecea;
+  color: #b71c1c;
+}
+
+.alert.success {
+  background: #e8f5e9;
+  color: #1b5e20;
+}
+
+/* Button */
+button {
+  width: 100%;
+  padding: 10px;
+  background: #0066cc;
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #005bb5;
+}
+
+button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid white;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}

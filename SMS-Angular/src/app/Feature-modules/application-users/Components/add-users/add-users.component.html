@@ -1,0 +1,77 @@
+<form [formGroup]="userForm" (ngSubmit)="submit()" class="card p-4 shadow-sm">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="mb-0">{{ isEditMode ? 'Edit User' : 'Add User' }}</h3>
+        <button class="btn btn-primary" [routerLink]="['/users/list']">User List</button>
+    </div>
+
+    <div class="row">
+        <!-- Left: Photo Upload -->
+        <!-- <div class="col-md-6">
+            <label class="form-label text-uppercase text-muted mb-2">Photo</label>
+            <div class="border p-4 text-center rounded" style="cursor: pointer;" (click)="fileInput.click()">
+                <ng-container *ngIf="previewUrl; else placeholder">
+                    <img [src]="previewUrl" alt="Preview" class="img-fluid"
+                        style="max-height: 200px; object-fit: contain;" />
+                </ng-container>
+                <ng-template #placeholder>
+                    <div class="text-muted">Click to upload</div>
+                </ng-template>
+                <input #fileInput type="file" accept="image/*" class="d-none" (change)="onFileChange($event)" />
+            </div>
+            <small class="text-danger" *ngIf="getErrorTip('photo')">{{ getErrorTip('photo') }}</small>
+        </div> -->
+        <div class="col-md-6">
+            <label class="form-label text-uppercase text-muted fw-semibold mb-2 sub-text" style="color: black !important;">Upload Image</label>
+            <div class="border border-dashed rounded-3 p-4 bg-light text-center position-relative hover-shadow"
+                style="cursor: pointer; min-height: 250px;" (click)="fileInput.click()">
+                <ng-container *ngIf="previewUrl; else placeholder">
+                    <img [src]="previewUrl" class="img-fluid rounded" alt="Preview"
+                        style="max-height: 240px; object-fit: contain;">
+                </ng-container>
+                <ng-template #placeholder>
+                    <div class="d-flex flex-column align-items-center justify-content-center h-100">
+                        <i class="bi bi-upload fs-1 text-muted"></i>
+                        <small class="text-muted mt-2">1600×1200 (4:3), PNG/JPG/GIF only</small>
+                    </div>
+                </ng-template>
+                <input #fileInput type="file" accept="image/png, image/jpeg, image/gif" class="d-none"
+                    (change)="onFileChange($event)" />
+            </div>
+            <div class="text-danger small mt-2"
+                *ngIf="userForm.get('photo')?.invalid && (userForm.get('photo')?.dirty || userForm.get('photo')?.touched)">
+                {{ errorMessage }}
+            </div>
+        </div>
+
+        <!-- Right: Form Fields -->
+        <div class="col-md-6">
+            <div class="row">
+                <!-- Two fields per row -->
+                <div class="col-md-6 mb-3" *ngFor="let field of fields">
+                    <label class="form-label" style="color: black !important;">{{ field.label }}</label>
+                    <input [type]="field.type" [formControlName]="field.name" class="form-control"
+                        [ngClass]="{ 'is-invalid': userForm.get(field.name)?.invalid && (userForm.get(field.name)?.touched || formSubmitted) }" />
+                    <small class="text-danger" *ngIf="getErrorTip(field.name)">{{ getErrorTip(field.name) }}</small>
+                </div>
+
+                <!-- Role Dropdown -->
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Role</label>
+                    <select class="form-select" formControlName="roleId"
+                        [ngClass]="{ 'is-invalid': userForm.get('roleId')?.invalid && (userForm.get('roleId')?.touched || formSubmitted) }">
+                        <option value="" disabled>Select Role</option>
+                        <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+                    </select>
+                    <small class="text-danger" *ngIf="getErrorTip('roleId')">{{ getErrorTip('roleId') }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4 text-end">
+        <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid || formSubmitted">
+            <span *ngIf="formSubmitted" class="spinner-border spinner-border-sm me-2"></span>
+            {{ isEditMode ? 'Update' : 'Submit' }}
+        </button>
+    </div>
+</form>
